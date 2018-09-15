@@ -1,0 +1,42 @@
+.new-tweet {
+  background-color: #ddd;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  margin: 2em;
+  font-family: 'Roboto Condensed', sans-serif;
+  z-index: 1000;
+}
+
+.new-tweet h2 {
+  border-bottom: 1px solid darkgray;
+  padding: 0 15px;
+}
+
+.new-tweet form {
+  padding: 0 25px 15px 15px;
+}
+
+.new-tweet textarea {
+  height: 3em;
+  line-height: 1.5;
+  padding: 5px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .new-tweet textarea {
+    font-size: 150%;
+  }
+}
+
+.new-tweet .counter {
+  float: right;
+  font-size: 90%;
+  font-weight: 300;
+  line-height: 2em;
+  padding-right: 5px;
+}
+
+.invalidCount {
+  color: red;
+}
