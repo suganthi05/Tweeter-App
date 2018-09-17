@@ -15,3 +15,16 @@ This repository is the starter code for the project: Students will fork and clon
 
 - Express
 - Node 5.10.x or above
+
+
+## Screenshots
+
+!["Screenshot of tweet compose box"](Tweeter-App/docs/tweet-box.png)
+
+!["Screenshot of Adding new tweet"](Tweeter-App/docs/add-new-tweet.png)
+    
+![Screenshot of tweets"](Tweeter-App/docs/added-tweets.png)
+
+![Screenshot of error message on empty tweet](Tweeter-App/docs/error-empty-tweet.png)
+
+![Screenshot of error message on lengthy tweet](Tweeter-App/docs/error-toolong-tweet.png)
