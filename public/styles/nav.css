@@ -1,24 +1,53 @@
 #nav-bar{
   top:0px;
+  right:1px;
   position: fixed;
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
   color: #e8fdff;
   background-color: #00a087;
   font-family: 'Roboto Condensed', sans-serif;
-  padding: 0 2em;
+  padding: 0em 2em;
   overflow: hidden;
   height:80px;
-   z-index: 1000;
+  z-index: 1000;
 }
+
 #nav-bar .logo{
+  margin: 10px;
 	height: 80px;
 	width: 80px;
 	float: left;
-	padding: 5px;
+	padding: 0 0 0 2em;
 }
+
+#nav-button i{
+  vertical-align: middle;
+}
+
 #nav-bar .header{
 	font-size: 2em;
 	float:left;
-	line-height: 80px;
+	line-height: 100px;
+}
+
+#nav-bar .nav-button {
+  opacity: 0.9;
+  color: #00a087;
+  background: #eee;
+  border: 1px solid #004a4a;
+  border-radius: 10px;
+  float: right;
+  margin: 0;
+  margin-top: 10px;
+  font-weight: 400;
+  padding: 0 10px;
+  height: 60px; 
+  width: 150px;
+  font-size: 1.5em;
+}
+
+#nav-bar .nav-button:hover {
+  opacity: 1;
+  cursor: pointer;
 }

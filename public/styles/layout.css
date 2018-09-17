@@ -1,15 +1,13 @@
-/*
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
- * https://css-tricks.com/international-box-sizing-awareness-day/
- * Do not modify these two selectors, please
- */
-font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Roboto Condensed',sans-serif;
+
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
 body {
   margin: 0;
   color: #244751;

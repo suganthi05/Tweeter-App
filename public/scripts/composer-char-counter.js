@@ -1,17 +1,26 @@
 $(document).ready(function() {
-var currCharvalue = 0;
-const allowedChar = 140;
-var remainChar =0;
-  $('.new-tweet textarea').on('input',function(){
-    console.log("second function");
-  currCharvalue = this.value.length;
-  remainChar = allowedChar - currCharvalue;
-  $(".counter").text(remainChar);
-  if(currCharvalue >140){
-    $('.counter').addClass("redFont");
-  }
-  else{
-    $('.counter').removeClass("redFont");
-  }
- });
+
+  let currCharvalue = 0;
+  const allowedChar = 140;
+  let remainChar =0;
+
+  $('.new-tweet textarea').on('input',function() {
+
+    currCharvalue = this.value.length;
+    remainChar = allowedChar - currCharvalue;
+    
+    $(".counter").text(remainChar);
+    $("#message").html("");
+
+    if(currCharvalue >140){
+      $('.counter').addClass("redFont");
+      $("#message").html("Tweet is too Long!");
+      $('#message').addClass("redFont");
+    } else {
+      $('.counter').removeClass("redFont");
+      $("#message").html("");
+    }
+
+  });
+
 });

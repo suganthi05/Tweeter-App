@@ -1,67 +1,24 @@
-$(() => {
+$(document).ready(function() {
 
-const tweetData = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
+  const tweetData = [];
 
-  const timeSince = (time) => {
-    const curTime = Date.now();
-    const timeDiff = curTime - time;//diff-timeDiff --> diff = now-time
+  const timeSince = (createdTime) => {
+
+    const currentTime = Date.now();
+    const timeDiff  = currentTime - createdTime;
     const diffMinutes = Math.floor((timeDiff / 1000) / 60);
     const diffHours = Math.floor(diffMinutes / 60);
     const diffDays = Math.floor(diffHours / 24);
+
     if (diffDays > 365) {
       return `long time ago`;
-    } else if (diffHours > 23) {
+    } else if (diffHours >= 24) {
       if (diffDays === 1) {
         return `a day ago`;
       } else {
         return `${diffDays} days ago`;
       }
-    } else if (diffMinutes > 59) {
+    } else if (diffMinutes >= 60) {
       if (diffHours === 1) {
         return `an hour ago`;
       } else {
@@ -76,6 +33,7 @@ const tweetData = [
         return `${diffMinutes} minutes ago`;
       }
     }
+    
   };
 
   const createTweetHeader = (tweetData) => {
@@ -102,6 +60,7 @@ const tweetData = [
       );
     return $footer;
   };
+  
   const createTweetElement = (tweetData) => {
     const $tweet = $("<article class='tweet'>")
       .append(createTweetHeader(tweetData))
@@ -109,9 +68,11 @@ const tweetData = [
       .append(createTweetFooter(tweetData));
     return $tweet;
   };
+
   const sortNewestFirst = (a, b) => {
     return a.created_at - b.created_at;
   };
+
   const renderTweets = (tweetsArr) => {
     $("#tweet-container").empty();
     const sortedTweets = tweetsArr.sort(sortNewestFirst);
@@ -121,8 +82,7 @@ const tweetData = [
     });
   };
 
-renderTweets(tweetData);
-
+  renderTweets(tweetData);
 
   function loadTweets() {
     $.ajax({
@@ -134,18 +94,18 @@ renderTweets(tweetData);
     });
   }
 
-loadTweets();
+  loadTweets();
 
-
- $("#compose-tweet").on("submit", function(event) {
+  $("#compose-tweet").on("submit", function(event) {
     event.preventDefault();
     let maxCount = 140;
-    let currentValue = maxCount - $('textarea').val().length;
-    console.log(currentValue);
-    if(maxCount === currentValue) {
-      alert('Tweet cannot be empty!');
+    let currentValue = maxCount - $('textarea').val().trim().length;
+    if (maxCount === currentValue) {
+      $("#message").html("Tweet cannot be empty!");
+      $('#message').addClass("redFont");
     } else if (currentValue < 0) {
-      alert('Tweet is too Long!');
+      $("#message").html("Tweet is too Long!");
+      $('#message').addClass("redFont");
     } else {
       $.ajax({
         type: 'POST',
@@ -155,12 +115,27 @@ loadTweets();
           $('.tweet-container').empty();
           $('textarea').val('');
           $('.counter').html('140');
-          loadTweets();
         }
       });
-  }
-
+      $('.tweet-container').empty();
+      $('textarea').val('');
+      $('.counter').html('140');
+      $("#message").html("");
+      loadTweets();
+    }
   });
+
+  $('.nav-button').click(function() {
+    $('body').animate({scrollTop:0}, 'slow');
+    $('.new-tweet').slideToggle("slow", function(){
+      $("textarea").focus();
+    });
+  });
+
+  $('textarea').bind('focus blur', function (){
+    $(this).toggleClass('button-focus');
+  });
+
 });
 
 
